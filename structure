@@ -1,0 +1,17 @@
+├── project_name
+│   │── env
+│   ├── routes
+│   │     └── api.py
+│   ├── src
+│   │    ├── __init__.py
+│   │    ├── endpoints
+│   │    │      ├── __init__.py
+│   │    │      ├── product.py
+│   │    │      └── user.py
+│   │    │
+│   │    └── models
+│   │           ├── __init__.py
+│   │           ├── product.py
+│   │           └── user.py
+│   ├── __init__.py
+│   ├── main.py

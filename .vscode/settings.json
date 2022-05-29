@@ -1,0 +1,7 @@
+{
+    "python.autoComplete.extraPaths": ["./backend-app"],
+    "python.defaultInterpreterPath": "env/Scripts/python",
+    "python.analysis.extraPaths": [
+        "./backend-app"
+    ],
+}
