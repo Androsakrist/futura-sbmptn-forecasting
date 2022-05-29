@@ -32,30 +32,33 @@ async def add_user(user: UserModel, bidang:BidangModel):
 async def make_target(target: TargetModel):
     return{"university": target.UnivId, "major": target.MajorId}
 
-@router.post("/sendScore/{bidang}}")
+@router.post("/sendScore/Science")
 async def send_score(bidang: BidangModel, science:ScienceModel, humanities: HumanitiesModel):
-    if bidang == BidangModel.Science:
-        return{"bidang": bidang, 
-                "Biology": science.Biology,
-                "Chemistry": science.Chemistry,
-                "Physics": science.Physics,
-                "Mathematics": science.Mathematics,
-                "Reading_Comprehension_Writing_Science": science.Reading_Comprehension_Writing_Science,
-                "General_Reasoning_Science": science.General_Reasoning_Science,
-                "Quantitative_Skills_Science": science.Quantitative_Skills_Science,
-                "General_Knowledge_Understanding_Science": science.General_Knowledge_Understanding_Science
-                }
-    if bidang == BidangModel.Humanities:
-                return{"bidang": bidang, 
-                "Economy": humanities.Economy,
-                "History": humanities.History,
-                "Geography": humanities.Geography,
-                "Sociology": humanities.Sociology,
-                "Reading_Comprehension_Writing_Humanities": humanities.Reading_Comprehension_Writing_Humanities,
-                "General_Reasoning_Humanities": humanities.General_Reasoning_Humanities,
-                "Quantitative_Skills_Humanities": humanities.Quantitative_Skills_Humanities,
-                "General_Knowledge_Understanding_Humanities": humanities.General_Knowledge_Understanding_Humanities
-                }
+    return{
+        "bidang": bidang, 
+        "Biology": science.Biology,
+        "Chemistry": science.Chemistry,
+        "Physics": science.Physics,
+        "Mathematics": science.Mathematics,
+        "Reading_Comprehension_Writing_Science": science.Reading_Comprehension_Writing_Science,
+        "General_Reasoning_Science": science.General_Reasoning_Science,
+        "Quantitative_Skills_Science": science.Quantitative_Skills_Science,
+        "General_Knowledge_Understanding_Science": science.General_Knowledge_Understanding_Science
+    }
+
+@router.post("/sendScore/Humanities")
+async def send_score(bidang: BidangModel, humanities: HumanitiesModel):
+    return{
+        "bidang": bidang, 
+        "Economy": humanities.Economy,
+        "History": humanities.History,
+        "Geography": humanities.Geography,
+        "Sociology": humanities.Sociology,
+        "Reading_Comprehension_Writing_Humanities": humanities.Reading_Comprehension_Writing_Humanities,
+        "General_Reasoning_Humanities": humanities.General_Reasoning_Humanities,
+        "Quantitative_Skills_Humanities": humanities.Quantitative_Skills_Humanities,
+        "General_Knowledge_Understanding_Humanities": humanities.General_Knowledge_Understanding_Humanities
+   }
 
 @router.put("/updateUser")
 async def read_user(user: UserModel, bidang:BidangModel):
