@@ -1,7 +1,7 @@
 {
-    "python.autoComplete.extraPaths": ["./backend-app"],
-    "python.defaultInterpreterPath": "env/Scripts/python",
+    "python.autoComplete.extraPaths": ["./Futura-sbmptn-forecasting"],
+    "python.defaultInterpreterPath": "venv/Scripts/python",
     "python.analysis.extraPaths": [
-        "./backend-app"
+        "./Futura-sbmptn-forecasting"
     ],
 }

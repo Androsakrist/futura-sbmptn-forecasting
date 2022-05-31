@@ -14,8 +14,8 @@ async def read_root():
     return [{"id": 1}, {"id": 2}]
 
 @router.get("/{user_id}")
-async def read_user(user_id: int):
-    return {"id": user_id, "full_name": "Danny Manny", "email": "danny.manny@gmail.com"}
+async def read_user(userM : UserModel):
+    return {"id": userM.user_id, "full_name": userM.nama , "email": "danny.manny@gmail.com"}
 
 @router.get("/detail")
 async def read_users(q: Optional[str] = Query(None, max_length=50)):
@@ -33,9 +33,8 @@ async def make_target(target: TargetModel):
     return{"university": target.UnivId, "major": target.MajorId}
 
 @router.post("/sendScore/Science")
-async def send_score(bidang: BidangModel, science:ScienceModel, humanities: HumanitiesModel):
+async def send_score(science:ScienceModel):
     return{
-        "bidang": bidang, 
         "Biology": science.Biology,
         "Chemistry": science.Chemistry,
         "Physics": science.Physics,
