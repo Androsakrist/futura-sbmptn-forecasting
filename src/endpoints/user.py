@@ -1,21 +1,13 @@
-from fastapi import Query, APIRouter
-from src.models.user import BidangModel, HumanitiesModel, ScienceModel, TargetModel, UserModel
+from fastapi import Body, Query, APIRouter
+from src.models.user import BidangModel, HumanitiesModel, ScienceModel, TargetModel, UserIn, UserModel, UserOut, gelModel
 from typing import Optional
 
-#APIRouter creates path operations for user module
+# APIRouter creates path operations for user module
 router = APIRouter(
     prefix="/users",
     tags=["User"],
     responses={404: {"description": "Not found"}},
 )
-
-@router.get("/")
-async def read_root():
-    return [{"id": 1}, {"id": 2}]
-
-@router.get("/{user_id}")
-async def read_user(userM : UserModel):
-    return {"id": userM.user_id, "full_name": userM.nama , "email": "danny.manny@gmail.com"}
 
 @router.get("/detail")
 async def read_users(q: Optional[str] = Query(None, max_length=50)):
@@ -24,16 +16,27 @@ async def read_users(q: Optional[str] = Query(None, max_length=50)):
         results.update({"q": q})
     return results
 
+
+# @router.get("/")
+# async def read_user():
+#     return{"id": .user_id, "full_name": userM.nama, "email": "danny.manny@gmail.com"}
+
+@router.post("/user/", response_model=UserOut)
+async def create_user(user: UserIn):
+    return user
+
+
 @router.post("/addUser")
-async def add_user(user: UserModel, bidang:BidangModel):
-    return {"id": user.user_id, "name": user.nama, "bidang": bidang}
+async def add_user(user: UserModel, bidang: BidangModel, gelombang: gelModel):
+    return {"id": user.user_id, "name": user.nama, "bidang": bidang, "gelombang": gelombang.value}
 
 @router.post("/makeTarget")
 async def make_target(target: TargetModel):
     return{"university": target.UnivId, "major": target.MajorId}
 
+
 @router.post("/sendScore/Science")
-async def send_score(science:ScienceModel):
+async def send_score(science: ScienceModel):
     return{
         "Biology": science.Biology,
         "Chemistry": science.Chemistry,
@@ -45,10 +48,11 @@ async def send_score(science:ScienceModel):
         "General_Knowledge_Understanding_Science": science.General_Knowledge_Understanding_Science
     }
 
+
 @router.post("/sendScore/Humanities")
 async def send_score(bidang: BidangModel, humanities: HumanitiesModel):
     return{
-        "bidang": bidang, 
+        "bidang": bidang,
         "Economy": humanities.Economy,
         "History": humanities.History,
         "Geography": humanities.Geography,
@@ -57,11 +61,12 @@ async def send_score(bidang: BidangModel, humanities: HumanitiesModel):
         "General_Reasoning_Humanities": humanities.General_Reasoning_Humanities,
         "Quantitative_Skills_Humanities": humanities.Quantitative_Skills_Humanities,
         "General_Knowledge_Understanding_Humanities": humanities.General_Knowledge_Understanding_Humanities
-   }
+    }
+
 
 @router.put("/updateUser")
-async def read_user(user: UserModel, bidang:BidangModel):
-    return {"id": user.user_id, "name": user.nama, "bidang": bidang, }
+async def add_user(user: UserModel, bidang: BidangModel, gelombang: gelModel = Body(..., description="choose gelombang")):
+    return {"id": user.user_id, "name": user.nama, "bidang": bidang, "gelombang": gelombang.value}
 
 @router.delete("/{user_id}/delete")
 async def read_user(user_id: int):
