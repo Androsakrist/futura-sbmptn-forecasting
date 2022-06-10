@@ -35,10 +35,6 @@ class ScienceModel(BaseModel):
     Quantitative_Skills_Science: float
     Mathematics: float
     General_Knowledge_Understanding_Science: float
-
-# class avgSci(BaseModel):
-#     saintek_avg:float
-#     potency_sci_avg: float
     
 class HumanitiesModel(BaseModel):
     Economy: float
@@ -48,6 +44,7 @@ class HumanitiesModel(BaseModel):
     Reading_Comprehension_Writing_Humanities: float
     General_Reasoning_Humanities: float
     Quantitative_Skills_Humanities: float
+    Mathematics: float
     General_Knowledge_Understanding_Humanities: float
 
 
