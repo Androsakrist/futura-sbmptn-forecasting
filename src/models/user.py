@@ -1,6 +1,5 @@
 # import email
 import uuid as uuid_pkg
-
 from enum import Enum, IntEnum
 from pydantic import BaseModel, Field, EmailStr
 from typing import Union
@@ -29,17 +28,19 @@ class penjurusan(BaseModel):
 
 class ScienceModel(BaseModel):
     Biology: float
-    Chemistry: float
     Physics: float
-    Mathematics: float
+    Chemistry: float
     Reading_Comprehension_Writing_Science: float
     General_Reasoning_Science: float
     Quantitative_Skills_Science: float
+    Mathematics: float
     General_Knowledge_Understanding_Science: float
 
-
+# class avgSci(BaseModel):
+#     saintek_avg:float
+#     potency_sci_avg: float
+    
 class HumanitiesModel(BaseModel):
-    bidang = BidangModel.Humanities
     Economy: float
     History: float
     Geography: float
@@ -52,7 +53,7 @@ class HumanitiesModel(BaseModel):
 
 class TargetModel(BaseModel):
     MajorId: int
-    UnivId: int
+    capacity: int
 
 class UserIn(BaseModel):
     username: str
