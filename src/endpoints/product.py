@@ -11,14 +11,6 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-@router.get("/")
-async def read_root():
-    return {"hello user"}
-
-@router.get("/{product_id}")
-async def read_item(product_id: int):
-    return {"id": product_id, "name": "Mobile", "code": "M12", "price": 200.0}
-
 # @router.get("/detail")
 # def read_users(q: Optional[str] = Query(None, max_length=50)):
 #     results = {"users": [{"id": 1}, {"id": 2}]}
@@ -105,5 +97,5 @@ async def Humanities(target:TargetModel, humanities:HumanitiesModel):
         ]])
     output= round(maketarget[0],2)
     return{
-        'hasil prediksi target kamu adalah: {}%'.format(output)
+        'Chance to achieve your target: {}%'.format(output)
     }

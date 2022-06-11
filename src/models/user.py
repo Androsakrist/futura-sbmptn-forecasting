@@ -1,19 +1,17 @@
-import numpy as np
 from pydantic import BaseModel, EmailStr
+from passlib.context import CryptContext
+from database import Base
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Date
+from sqlalchemy.orm import relationship
 
-class UserIn(BaseModel):
-    username: str
-    password: str
-    email: EmailStr
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "username": "LukeSkywalker",
-                "password": "deathStar@123",
-                "email": "luke@tatooine.com"
-            }
-        }
+class Users(Base):
+    __tablename__ = 'users'
+
+    username = Column(String, primary_key=True, unique=True, nullable=False)
+    password = Column(String, nullable=False)
+
+    users = relationship("Users", back_populates="owner")
 
 
 class UserOut(BaseModel):
@@ -22,7 +20,13 @@ class UserOut(BaseModel):
 
 logDB = []
 
-def getArr():
-    return np.array(logDB, dtype=np.float64)
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated = "auto")
 
+class hasher:
+    @staticmethod
+    def get_hash_password(plain_password):
+        return pwd_context.hash(plain_password)
 
+    @staticmethod
+    def verivy_password(plain_password, hash_password):
+        return pwd_context.verify(plain_password, hash_password)
