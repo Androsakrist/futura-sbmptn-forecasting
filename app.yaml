@@ -14,7 +14,7 @@
 
 runtime: python39
 env: flex
-entrypoint: entrypoint: gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker
+entrypoint: entrypoint: gunicorn -b :$PORT main:app 
 
 runtime_config:
   python_version: 3
