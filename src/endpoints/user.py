@@ -23,9 +23,8 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
 # give permission if logged in
 @router.get("/predictions")
 async def read_root(token: str = Depends(oauth2_scheme)):
-    # print (token)
+    print (token)
     for x in logDB:
        results = "Latest prediction score :{}%".format(x)
-
     return results
     

@@ -1,22 +1,22 @@
 from pydantic import BaseModel, EmailStr
 from passlib.context import CryptContext
-from database import Base
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Date
-from sqlalchemy.orm import relationship
+# from database import Base
+# # from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Date
+# from sqlalchemy.orm import relationship
 
 
-class Users(Base):
-    __tablename__ = 'users'
+# class Users(Base):
+#     __tablename__ = 'users'
 
-    username = Column(String, primary_key=True, unique=True, nullable=False)
-    password = Column(String, nullable=False)
+#     username = Column(String, primary_key=True, unique=True, nullable=False)
+#     password = Column(String, nullable=False)
 
-    users = relationship("Users", back_populates="owner")
+#     users = relationship("Users", back_populates="owner")
 
 
-class UserOut(BaseModel):
-    username: str
-    email: EmailStr
+# class UserOut(BaseModel):
+#     username: str
+#     email: EmailStr
 
 logDB = []
 

@@ -5,11 +5,11 @@ from routes.api import router as api_router
 from database import engine
 from database import Base
 
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 
-tags_metadata = [
-    {"name": "user", "description": "This is user route"},
-]
+# tags_metadata = [
+#     {"name": "user", "description": "This is user route"},
+# ]
 
 app = FastAPI()
 
