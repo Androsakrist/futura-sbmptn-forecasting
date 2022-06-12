@@ -18,11 +18,11 @@ async def read_root():
     return {"hello user, dont forget to login to see your latest prediction"}
 
 @router.post("/createUser", status_code=status.HTTP_201_CREATED, response_model=UserCreate)
-def create_user(user: Users, db: Session = Depends(get_db)):
+def create_user(user: UserCreate, db: Session = Depends(get_db)):
     # hash the password
     hashed_password = hash(user.password)
-    Users.password = hashed_password
-    new_user = Users(**user.dict())
+    user.password = hashed_password
+    new_user = User(**user.dict())
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
@@ -42,13 +42,6 @@ def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session =
     if not verify(user_credentials.password, user.password):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, detail=f"Invalid Credentials")
-
-
-# authentication user token
-@router.post("/token", tags=["login"])
-async def login(form_data: OAuth2PasswordRequestForm = Depends()):
-    # print(form_data)
-    return{"access token": form_data.username + 'token'}
 
 # give permission if logged in
 @router.post("/predictions")

@@ -10,28 +10,34 @@ from sqlalchemy.orm import relationship, mapper
 from db import Base
 logDB = []
 
-user = Table('category', metadata,
-                 Column('username', String, primary_key=True),
-                 Column('passowrd', String(200))
-                 )
+# user = Table('category', metadata,
+#                  Column('username', String, primary_key=True),
+#                  Column('passowrd', String(200))
+#                  )
+
+# class User(Base):
+#     def __init__(self, username: str, password: str):
+#         self.username = username
+#         self.password = password
 
 class User(Base):
-    def __init__(self, username: str, password: str):
-        self.username = username
-        self.password = password
+    __tablename__ = 'user'
+    username = Column(String, primary_key=True, nullable=False)
+    password = Column(String, nullable=False)
+
 class Config:
         arbitrary_types_allowed = True
         orm_mode = True
 
 Users = sqlalchemy_to_pydantic(User)
 
-mapper(User, user)
+# mapper(User, user)
 
 class TokenData(BaseModel):
     username: Optional[str]= None
 
 class UserCreate(BaseModel):
-    email: EmailStr
+    username: str
     password: str
 
 class UserInDB(UserCreate):
