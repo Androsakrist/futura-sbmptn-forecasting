@@ -14,7 +14,7 @@
 
 runtime: python39
 instance_class: F2
-entrypoint: gunicorn main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 127.0.0.1:8005 --timeout 600
+entrypoint: gunicorn main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --timeout 600
 service_account: app-engine-sql@cool-lambda-351216.iam.gserviceaccount.com
 runtime_config:
   python_version: 3
