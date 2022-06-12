@@ -1,31 +1,49 @@
 from importlib.metadata import metadata
-from typing import Optional
 from pydantic_sqlalchemy import sqlalchemy_to_pydantic
 from pydantic import BaseModel, EmailStr
 from passlib.context import CryptContext
-from database import Base
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Date, Table
-from sqlalchemy.orm import relationship
+from typing import List, Optional
+from sqlmodel import Field, SQLModel
+from sqlalchemy.sql.expression import text
+from sqlalchemy import Column, Integer, String, Boolean, Table
+from sqlalchemy.orm import relationship, mapper
+from db import Base
+logDB = []
 
 user = Table('category', metadata,
                  Column('username', String, primary_key=True),
                  Column('passowrd', String(200))
                  )
 
-class Users(Base):
-    __tablename__ = 'users'
+class User(Base):
+    def __init__(self, username: str, password: str):
+        self.username = username
+        self.password = password
+class Config:
+        arbitrary_types_allowed = True
+        orm_mode = True
 
-    username = Column(String, primary_key=True, unique=True, nullable=False)
-    password = Column(String, nullable=False)
+Users = sqlalchemy_to_pydantic(User)
 
-    users = relationship("Users", back_populates="owner")
+mapper(User, user)
 
 class TokenData(BaseModel):
     username: Optional[str]= None
 
-class UserOut(BaseModel):
-    username: str
+class UserCreate(BaseModel):
     email: EmailStr
+    password: str
+
+class UserInDB(UserCreate):
+    hashed_password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    id: Optional[str] = None
+
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated = "auto")
 
