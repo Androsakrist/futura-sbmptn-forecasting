@@ -4,14 +4,6 @@ from enum import Enum, IntEnum
 from pydantic import BaseModel, Field, EmailStr
 from typing import Union
 
-class UserModel(BaseModel):
-    user_id: uuid_pkg.UUID = Field(
-        default_factory= uuid_pkg.uuid4, nullable = False)
-    # email: 
-    nama: Union[str, None] = Field(
-        default=None, max_length=32     
-    )
-
 class gelModel(IntEnum):
     gelombang_satu= 1
     gelombang_dua= 2
@@ -49,14 +41,3 @@ class HumanitiesModel(BaseModel):
 class TargetModel(BaseModel):
     MajorId: int
     capacity: int
-
-class UserIn(BaseModel):
-    username: str
-    password: str
-    email: EmailStr
-    full_name: Union[str, None] = None
-    
-class UserOut(BaseModel):
-    username: str
-    email: EmailStr
-    full_name: Union[str, None] = None

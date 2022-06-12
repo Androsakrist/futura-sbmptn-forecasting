@@ -99,3 +99,24 @@ async def Humanities(target:TargetModel, humanities:HumanitiesModel):
     return{
         'Chance to achieve your target: {}%'.format(output)
     }
+
+    
+'''sample
+{
+  "target": {
+    "MajorId": 1112017,
+    "capacity": 24
+  },
+  "humanities": {
+    "Economy":700,
+    "History": 700,
+    "Geography": 700,
+    "Sociology": 700,
+    "Reading_Comprehension_Writing_Humanities": 700,
+    "General_Reasoning_Humanities": 700,
+    "Quantitative_Skills_Humanities": 700,
+    "Mathematics": 700,
+    "General_Knowledge_Understanding_Humanities": 700
+  }
+}
+'''
